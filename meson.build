@@ -16,7 +16,10 @@ ex_sources = files(f'@src_dir@/main.cpp')
 shared_lib = library('cma_read_shared',
                      sources,
                      include_directories: [public_include_dir, lib_include_dir],
-                     pic: true)
+                     pic: true,install:true)
+
+shared_lib_dependency = declare_dependency(include_directories: [public_include_dir, lib_include_dir],sources: sources,link_with:[shared_lib])
+  
 
 # Build static library
 static_library('cma_read_static',
