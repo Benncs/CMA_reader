@@ -1,0 +1,17 @@
+# LSP AND IDE 
+.vscode/ 
+.cache/
+.clang*
+compile_commands.json 
+
+
+#Benchs
+*.folder
+*.data*
+*.svg
+# Builds 
+builddir/
+
+# Python 
+__pycache__
+*.so
