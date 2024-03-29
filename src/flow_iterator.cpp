@@ -11,7 +11,6 @@ FlowIterator::FlowIterator(std::span<std::string> files, size_t n_repetition)
   : current(0), current_repeat(0), n_repeat(n_repetition)
 {
 
-  try {
 
     for (auto &&f : files)
     {
@@ -26,11 +25,8 @@ FlowIterator::FlowIterator(std::span<std::string> files, size_t n_repetition)
     }
 
 
-  }
-  catch (const std::exception&) 
-  {
-    it = nullptr;
-  }
+  
+
 }
 ReactorState * FlowIterator::next()
 {
