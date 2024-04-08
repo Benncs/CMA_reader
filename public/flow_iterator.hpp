@@ -21,9 +21,11 @@ public:
     return this->it;
   }
 
-  void setRepetition(size_t n_repetition){this->n_repeat = n_repetition;}
+  void setRepetition(size_t n_repetition){this->n_repeat = n_repetition/flows.size();}
 
   size_t totalSteps()const{return flows.size()*(n_repeat+1);}
+
+  size_t loop_size()const{return flows.size();}
 
 private:
   ReactorState *it;
