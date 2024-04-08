@@ -29,7 +29,7 @@ CasePaths get_paths(std::string_view path)
 
         std::istringstream iss(line);
         std::string junk; // Dummy variable to consume unnecessary parts
-        
+
         // Read and discard "model:"
         iss >> junk;
         // Read geometry filepath
@@ -55,8 +55,11 @@ CasePaths get_paths(std::string_view path)
         }
       }
     }
+  }else {
+    throw std::runtime_error("No such file");
   }
-  return case_info;
+
+return case_info;
 }
 
 RawDataFlux RawDataFlux::read(std::string_view path)
@@ -73,14 +76,13 @@ RawDataFlux RawDataFlux::read(std::string_view path)
     for (uint32_t i_flux = 0; i_flux < header.n_max; ++i_flux)
     {
       f1.read(reinterpret_cast<char *>(&fluxes[i_flux]),
-              sizeof(fluxes[i_flux]));
+          sizeof(fluxes[i_flux]));
     }
     f1.close();
   }
   else
   {
-    header.n_max = 0;
-    header.n_zone = 0;
+    throw std::runtime_error("No such file");
   }
 
   return {header, fluxes};
@@ -98,10 +100,10 @@ RawDataScalar RawDataScalar::read(std::string_view path)
     f1.read(reinterpret_cast<char *>(&header), sizeof(header));
     value.resize(header.n_zone);
     for (uint32_t i_compartment = 0; i_compartment < header.n_zone;
-         ++i_compartment)
+        ++i_compartment)
     {
       f1.read(reinterpret_cast<char *>(&value[i_compartment]),
-              sizeof(values[i_compartment]));
+          sizeof(values[i_compartment]));
     }
     f1.close();
   }

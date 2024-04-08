@@ -8,20 +8,26 @@
 // }
 
 FlowIterator::FlowIterator(std::span<std::string> files, size_t n_repetition)
-    : current(0), current_repeat(0), n_repeat(n_repetition)
+  : current(0), current_repeat(0), n_repeat(n_repetition)
 {
-  for (auto &&f : files)
-  {
-    flows.push_back(ReactorState::read(f));
-  }
 
-  end = flows.size();
-  if (flows.size() != 0)
-  {
-    it = &flows[current];
-  }
+
+    for (auto &&f : files)
+    {
+
+      flows.push_back(ReactorState::read(f));
+    }
+
+    end = flows.size();
+    if (flows.size() != 0)
+    {
+      it = &flows[current];
+    }
+
+
+  
+
 }
-
 ReactorState * FlowIterator::next()
 {
   if (current != end - 1)
@@ -37,7 +43,7 @@ ReactorState * FlowIterator::next()
     }
     else
     {
-      
+
       it = nullptr;
       return it;
     }

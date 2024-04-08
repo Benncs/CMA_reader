@@ -11,7 +11,12 @@ int main()
       {"../BIREM_generate/out/"};
 
   FlowIterator it = FlowIterator(files, 1);
-
+  
+  auto f= it.get();
+  if(f==nullptr)
+  {
+    std::cout<<"No suchfile"<<std::endl;
+  }
   // FlowInfo *f = it.get();
 
   // while (f != nullptr)
